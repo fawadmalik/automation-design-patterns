@@ -1,1 +1,23 @@
+Achieving high-quality test automation that brings value requires an understanding of core programming concepts such as SOLID. It also requires the usage of design patterns. After you master them, the usual career transition is into more architecture roles, such as choosing the best possible approaches for solving particular test automation challenges. Lets explore these concepts.
+
+The goal of an automation SDET should always be to write more stable and faster tests. One way to achieve this is by learning the many Industry best rpactices and design patterns related to automated test code writing and framework creation. Eventually the automated tests you write would need less time to figure out what went wrong, to be easier to support new requirements and allow easy onboarding of new team members to become productive faster.
+
+Different Types of Tests
+Unit Tests : Aimed at testing an individual object and even individual methods of an object. These highly important tests prevent bugs from getting introduced at the lowest level of your code. Unit tests mostly use data generated specifically for the unit test and do not use real data.
+Integration Tests : Aimed at testing interaction and integration between modules, allowing them to pass data between each other. Also known as component integration tests or integration tests in the small. Typically third-party services such as network, file
+system, and OS interaction is mocked out. When 3rd party services and dependencies are not isolated or mocled these tests are called integration test in the large.
+System Tests : Also called End-to-end tests, UI tests, User Scenario tests, are aimed at testing your product's functional or non-functional requirements at the highest level of operation as a real user. It executes in a production-like environment, such as test (TEST) that is farther from production or staging (STA) that is closer to production. This allows tests to verify that all the components, including third-party services, can communicate well with each other during real User scenarios and workflows. 
+When verifyinh against the user interface (UI), then they are called UI tests.
+When verifying a real User scenario, from the beginning to the end using the UI of your SUT they are called End-to-end (user scenario) tests. In such cases some steps of the tests may be done indirectly to set the test up. This is called a pre-condition. For instance: instead of logging in each time through the UI or registering new users, you can use the DB directly or the internal APIs to do so.
+
+What Is a Test Automation Framework? Definitions
+???
+
+SOLID Principles
+SOLID is a mnemonic acronym for five design principles related to object-oriented programming. Their goal is to help us write maintainable and extensible software. SOLID stands for:
+SRP – Single Responsibility Principle
+OCP – Open/Closed Principle
+LSP – Liskov Substitution Principle
+ISP – Interface Segregation Principle
+DIP – Dependency Inversion Principle
 
