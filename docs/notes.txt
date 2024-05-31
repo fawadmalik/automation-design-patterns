@@ -21,3 +21,20 @@ LSP – Liskov Substitution Principle
 ISP – Interface Segregation Principle
 DIP – Dependency Inversion Principle
 
+Desirable attributes of automation frameworks
+
+Maintainability
+How easy is it to customize, refactor or extend your automation framework or testing application?
+How easy is it to debug and root-cause test failires or test-run exceptions?
+How quickly can you determine a test failure to be a test code bug or a bug in the SUT?
+Maintainable code is easier to support, easier to extend for new requirements and easier to debug and root-cause.
+
+Maintainable code exhibits the DRY principle; Don't Repeat Yourself
+DRY invovles removing all un-necessassary code duplication including:
+- duplicate code
+- duplicate tests
+- duplicate test goals
+
+
+
+
