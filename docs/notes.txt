@@ -51,5 +51,5 @@ How long does it take a new user to write a test using the test library. Syntact
 * Extensibility
 A hard task in testing framework development, is to allow frameworks to be extensible and customizable. Shared libraries used across different teams, should be able to customize the framework to fit their needs as their contexts and scenarios would likely be unoque to them.
 
-
-
+* Learning Curve
+How easy is it to onboard someone to start being independently productive with your framework/library. How easily can someone learn to extend or maintain your existing tests.
