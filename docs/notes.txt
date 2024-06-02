@@ -37,7 +37,8 @@ DRY invovles removing all un-necessassary code duplication including:
 
 Be wary of Premature Optimization with DRY or other best practices
 Donald Knuth's quote from his book, The Art of Computer Programming, states:
-> “The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming.” >
+> The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming.
+
 
 
 
