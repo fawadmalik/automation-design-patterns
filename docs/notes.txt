@@ -44,6 +44,12 @@ Donald Knuth's quote from his book, The Art of Computer Programming, states:
 * Test Readability
 Unreadable test code makes it tougher to read, maintain, understand and bug introduction. Comments are great to assist in readability but not a replacement of simpler code. Better named variables, methods and classes help improve code readability. Comments also have a habit of becoming outdated as code evolves.
 
+* API usability
+How easy is it to discover what the API methods do and how to use them. 
+How long does it take a new user to write a test using the test library. Syntactic sugar helps discover API usage.
+
+* Extensibility
+A hard task in testing framework development, is to allow frameworks to be extensible and customizable. Shared libraries used across different teams, should be able to customize the framework to fit their needs as their contexts and scenarios would likely be unoque to them.
 
 
 
