@@ -23,7 +23,8 @@ DIP – Dependency Inversion Principle
 
 Desirable attributes of automation frameworks
 
-Maintainability
+* Maintainability
+
 How easy is it to customize, refactor or extend your automation framework or testing application?
 How easy is it to debug and root-cause test failires or test-run exceptions?
 How quickly can you determine a test failure to be a test code bug or a bug in the SUT?
@@ -37,7 +38,11 @@ DRY invovles removing all un-necessassary code duplication including:
 
 Be wary of Premature Optimization with DRY or other best practices
 Donald Knuth's quote from his book, The Art of Computer Programming, states:
+
 > The real problem is that programmers have spent far too much time worrying about efficiency in the wrong places and at the wrong times; premature optimization is the root of all evil (or at least most of it) in programming.
+
+* Test Readability
+Unreadable test code makes it tougher to read, maintain, understand and bug introduction. Comments are great to assist in readability but not a replacement of simpler code. Better named variables, methods and classes help improve code readability. Comments also have a habit of becoming outdated as code evolves.
 
 
 
