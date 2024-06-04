@@ -27,11 +27,24 @@ public class PurchaseSuccessTests {
         WebElement addToCartFalcon9 = driver.findElement(By.cssSelector("*[data-product_id*='28']"));
         addToCartFalcon9.click();
         try {
-            Thread.sleep(10000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         WebElement viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
         viewCartButton.click();
+
+        WebElement couponCodeTextField = driver.findElement(By.id("coupon_code"));
+        couponCodeTextField.clear();
+        couponCodeTextField.sendKeys("happybirthday");
+        WebElement applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply Coupon']"));
+        applyCouponButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
+        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
     }
 }
