@@ -24,6 +24,14 @@ public class PurchaseSuccessTests {
     @Test
     public void verifyTestConfigurationSetup(){
         driver.navigate().to("http://demos.bellatrix.solutions/");
-        System.out.println("Title: " + driver.getTitle());
+        WebElement addToCartFalcon9 = driver.findElement(By.cssSelector("*[data-product_id*='28']"));
+        addToCartFalcon9.click();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
+        viewCartButton.click();
     }
 }
