@@ -37,7 +37,7 @@ public class PurchaseSuccessTests {
         WebElement couponCodeTextField = driver.findElement(By.id("coupon_code"));
         couponCodeTextField.clear();
         couponCodeTextField.sendKeys("happybirthday");
-        WebElement applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply Coupon']"));
+        WebElement applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
         applyCouponButton.click();
         try {
             Thread.sleep(5000);
