@@ -46,5 +46,30 @@ public class PurchaseSuccessTests {
         }
         WebElement messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
         Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
+
+        
+        WebElement quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
+        quantityBox.clear();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        quantityBox.sendKeys("2");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
+        updateCart.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
+        Assert.assertEquals("114.00€", totalSpan.getText());
     }
 }
