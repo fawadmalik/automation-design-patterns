@@ -71,5 +71,16 @@ public class PurchaseSuccessTests {
         }
         WebElement totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals("114.00€", totalSpan.getText());
+
+        WebElement proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        proceedToCheckout.click();
+        WebElement billingFirstName = driver.findElement(By.id("billing_first_name"));
+        billingFirstName.sendKeys("Anton");
+        WebElement bilingLastName = driver.findElement(By.id("billing_last_name"));
+        bilingLastName.sendKeys("Angelov");
+        WebElement billingCompany = driver.findElement(By.id("billing_company"));
+        billingCompany.sendKeys("Space Flowers");
+        WebElement billingCountryWrapper = driver.findElement(By.id("select2-billing_country_container"));
+        billingCountryWrapper.click();
     }
 }
