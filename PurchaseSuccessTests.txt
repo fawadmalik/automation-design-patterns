@@ -1,7 +1,8 @@
 Before each test method Sets up the test environment :
 - initializes the WebDriver, 
--sets up the ChromeDriver, 
+- sets up the ChromeDriver, 
 - and configures implicit wait.
+The browser selected for the test needs a browser driver downloaded, which gets updated by the driver creator from time to time. We use a library called WebDriverManager to automatically download the correct version of the driver matching the browser.
 
 After each test method cleans up the test environment
 - Quits the WebDriver instance to close the browser.
@@ -28,3 +29,4 @@ The test steps and Asserts the expected outcomes at each step.
 - Pause for 10 seconds to ensure the order is processed
 - Verify the order received message
 
+All the calls 
