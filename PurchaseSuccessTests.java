@@ -82,7 +82,7 @@ public class PurchaseSuccessTests {
         billingCompany.sendKeys("Space Flowers");
         WebElement billingCountryWrapper = driver.findElement(By.id("select2-billing_country-container"));
         billingCountryWrapper.click();
-        WebElement billingCountryFilter = driver.findElement(By.className("select2-search_field"));
+        WebElement billingCountryFilter = driver.findElement(By.className("select2-search__field"));
         billingCountryFilter.sendKeys("Germany");
         WebElement germanyOption  = driver.findElement(By.xpath("//*[contains(text(), 'Germany')]"));
         germanyOption.click();
@@ -92,7 +92,7 @@ public class PurchaseSuccessTests {
         billingAddress2.sendKeys("Lotzowplatz");
         WebElement billingCity = driver.findElement(By.id("billing_city"));
         billingCity.sendKeys("Berlin");
-        WebElement billingZip = driver.findElement(By.id("billing_zip"));
+        WebElement billingZip = driver.findElement(By.id("billing_postcode"));
         billingZip.clear();
         billingZip.sendKeys("10115");
         WebElement billingPhone = driver.findElement(By.id("billing_phone"));
@@ -100,15 +100,19 @@ public class PurchaseSuccessTests {
         WebElement billingEmail = driver.findElement(By.id("billing_email"));
         billingEmail.sendKeys("info@berlinspaceflowers.com");
         var purchaseEmail = "info@berlinspaceflowers.com";
-
-        WebElement placeOrderButton = driver.findElement(By.id("place_order"));
-        placeOrderButton.click();
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        WebElement recievedMessage = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/main/div/header/h1"));
+        WebElement placeOrderButton = driver.findElement(By.id("place_order"));
+        placeOrderButton.click();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement recievedMessage = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(recievedMessage.getText(), "Order received");
     }
 }
