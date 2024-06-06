@@ -80,7 +80,35 @@ public class PurchaseSuccessTests {
         bilingLastName.sendKeys("Angelov");
         WebElement billingCompany = driver.findElement(By.id("billing_company"));
         billingCompany.sendKeys("Space Flowers");
-        WebElement billingCountryWrapper = driver.findElement(By.id("select2-billing_country_container"));
+        WebElement billingCountryWrapper = driver.findElement(By.id("select2-billing_country-container"));
         billingCountryWrapper.click();
+        WebElement billingCountryFilter = driver.findElement(By.className("select2-search_field"));
+        billingCountryFilter.sendKeys("Germany");
+        WebElement germanyOption  = driver.findElement(By.xpath("//*[contains(text(), 'Germany')]"));
+        germanyOption.click();
+        WebElement billingAddress1 = driver.findElement(By.id("billing_address_1"));
+        billingAddress1.sendKeys("1 Willi Brandt Avenue TearGarten");
+        WebElement billingAddress2 = driver.findElement(By.id("billing_address_2"));
+        billingAddress2.sendKeys("Lotzowplatz");
+        WebElement billingCity = driver.findElement(By.id("billing_city"));
+        billingCity.sendKeys("Berlin");
+        WebElement billingZip = driver.findElement(By.id("billing_zip"));
+        billingZip.clear();
+        billingZip.sendKeys("10115");
+        WebElement billingPhone = driver.findElement(By.id("billing_phone"));
+        billingPhone.sendKeys("+0048888999281");
+        WebElement billingEmail = driver.findElement(By.id("billing_email"));
+        billingEmail.sendKeys("info@berlinspaceflowers.com");
+        var purchaseEmail = "info@berlinspaceflowers.com";
+
+        WebElement placeOrderButton = driver.findElement(By.id("place_order"));
+        placeOrderButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement recievedMessage = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/main/div/header/h1"));
+        Assert.assertEquals(recievedMessage.getText(), "Order received");
     }
 }
