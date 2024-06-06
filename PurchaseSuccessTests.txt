@@ -29,4 +29,13 @@ The test steps and Asserts the expected outcomes at each step.
 - Pause for 10 seconds to ensure the order is processed
 - Verify the order received message
 
-All the calls 
+Most modern websites use modern JavaScript technologies where most operations are asynchronous. 
+We have used hardcoded pauses with Thread.sleep(5000) for a 5 second wait. This is one area that 
+we will focus on to optimize in later versions of this test.
+The static variables are for sharing data between other tests in the class.
+
+### When tests fail
+It could mean any one or all of the following:
+1. Real defect or problem in the SUT (System Under test)
+2. Test environment issue (network was down, test environment was not ready etc.)
+3. Defect in the test code, specially if the tests fail intermittently. These are called non-deterministic or flaky tests.
