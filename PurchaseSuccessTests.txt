@@ -1,0 +1,27 @@
+Before each test method Sets up the test environment :
+- initializes the WebDriver, 
+-sets up the ChromeDriver, 
+- and configures implicit wait.
+
+After each test method cleans up the test environment
+- Quits the WebDriver instance to close the browser.
+
+     * Verifies the configuration setup and the purchase flow.
+     * Navigates to the demo site, adds a product to the cart, applies a coupon, and completes the purchase.
+     * Asserts the expected outcomes at each step.
+          // Navigate to the demo e-commerce website
+        // Add Falcon 9 product to the cart
+        // Wait for 10 seconds to ensure the product is added to the cart
+        // Click on the "View Cart" button
+        // Apply coupon code "happybirthday"
+        // Wait for 5 seconds to ensure the coupon is applied
+        // Verify the coupon application message
+        // Proceed to checkout
+        // Fill in billing details
+        // Pause for 5 seconds before placing the order
+        // Place the order
+        // Pause for 10 seconds to ensure the order is processed
+        // Verify the order received message
+
+
+  
