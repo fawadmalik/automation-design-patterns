@@ -8,7 +8,9 @@ import java.util.concurrent.TimeUnit;
 
 public class PurchaseSuccessTests {
     private WebDriver driver;
-
+    private static String purchaseEmail;
+    private static String purchaseOrderNumber;
+    
     @BeforeMethod
     public void testSetup(){
         WebDriverManager.chromedriver().setup();
@@ -99,7 +101,7 @@ public class PurchaseSuccessTests {
         billingPhone.sendKeys("+0048888999281");
         WebElement billingEmail = driver.findElement(By.id("billing_email"));
         billingEmail.sendKeys("info@berlinspaceflowers.com");
-        var purchaseEmail = "info@berlinspaceflowers.com";
+        purchaseEmail = "info@berlinspaceflowers.com";
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
