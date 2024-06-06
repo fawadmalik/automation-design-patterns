@@ -22,7 +22,7 @@ public class PurchaseSuccessTests {
     }
 
     @Test
-    public void verifyTestConfigurationSetup(){
+    public void verifyOrderPlacementSuccessWithCouponApplied(){
         driver.navigate().to("http://demos.bellatrix.solutions/");
         WebElement addToCartFalcon9 = driver.findElement(By.cssSelector("*[data-product_id*='28']"));
         addToCartFalcon9.click();
