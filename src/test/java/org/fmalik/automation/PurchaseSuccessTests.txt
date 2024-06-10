@@ -7,7 +7,7 @@ The browser selected for the test needs a browser driver downloaded, which gets 
 After each test method cleans up the test environment
 - Quits the WebDriver instance to close the browser.
 
-First test: verifyOrderPlacementSuccessWithCouponApplied
+First test: verifyPurchaseSuccessWithNewClient
 The test steps and Asserts the expected outcomes at each step.
 - Navigate to the demo e-commerce website
 - Add Falcon 9 product to the cart
@@ -39,3 +39,10 @@ It could mean any one or all of the following:
 1. Real defect or problem in the SUT (System Under test)
 2. Test environment issue (network was down, test environment was not ready etc.)
 3. Defect in the test code, specially if the tests fail intermittently. These are called non-deterministic or flaky tests.
+
+Second Test : verifyPurchaseSuccessWithExistingClient
+The second test will:
+- reuse the email from the first test and repeat roughtly the steps from the first test. This will test prefilling of all user info fields and verify complete the purchase.
+- extract the generated order number displayed on the success order page at the end of the test.
+
+This captured orderd number will be used in the third test to verify that the information is displayed correctly in the "My Account" section.
