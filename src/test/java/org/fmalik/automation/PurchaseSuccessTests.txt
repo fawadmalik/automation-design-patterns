@@ -42,6 +42,7 @@ It could mean any one or all of the following:
 
 Second Test : verifyPurchaseSuccessWithExistingClient
 The second test will:
+- reuse most of the test steps from the forst tests because teh order placement steps are the same
 - reuse the email from the first test and repeat roughtly the steps from the first test. This will test prefilling of all user info fields and verify complete the purchase.
 - extract the generated order number displayed on the success order page at the end of the test.
 
