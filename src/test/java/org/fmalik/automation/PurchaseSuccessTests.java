@@ -30,7 +30,7 @@ public class PurchaseSuccessTests {
     }
 
     @Test
-    public void verifyOrderPlacementSuccessWithCouponApplied(){
+    public void verifyPurchaseSuccessWithNewClient(){
         driver.navigate().to("http://demos.bellatrix.solutions/");
         System.out.println("Title: " + driver.getTitle());
         WebElement addToCartFalcon9 = driver.findElement(By.cssSelector("*[data-product_id*='28']"));
@@ -122,5 +122,93 @@ public class PurchaseSuccessTests {
         }
         WebElement recievedMessage = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(recievedMessage.getText(), "Order received");
+    }
+
+    @Test(priority = 2)
+    public void verifyPurchaseSuccessWithExistingClient(){
+        driver.navigate().to("http://demos.bellatrix.solutions/");
+        WebElement addToCartFalcon9 = driver.findElement(By.cssSelector("*[data-product_id*='28']"));
+        addToCartFalcon9.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
+        viewCartButton.click();
+
+        WebElement couponCodeTextField = driver.findElement(By.id("coupon_code"));
+        couponCodeTextField.clear();
+        couponCodeTextField.sendKeys("happybirthday");
+        WebElement applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
+        applyCouponButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
+        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
+
+        WebElement quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
+        quantityBox.clear();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        quantityBox.sendKeys("2");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
+        updateCart.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
+        Assert.assertEquals("114.00€", totalSpan.getText());
+
+        WebElement proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        proceedToCheckout.click();
+
+        WebElement loginHereLink = driver.findElement(By.linkText("Click here to login"));
+        loginHereLink.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement userName = driver.findElement(By.id("username"));
+        userName.sendKeys(purchaseEmail);
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys(GetUserPasswordFromDB(purchaseEmail));
+        WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
+        loginButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement placeOrderButton = driver.findElement(By.id("place_order"));
+        placeOrderButton.click();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement recievedMessage = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
+        Assert.assertEquals(recievedMessage.getText(), "Order received");
+        WebElement orderNumber = driver.findElement(By.xpath("//*[@id='post-7']//li[1]/strong"));
+        purchaseOrderNumber = orderNumber.getText();
+    }
+
+    private String GetUserPasswordFromDB(String username) {
+        return "abc1234";
     }
 }
