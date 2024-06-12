@@ -59,3 +59,15 @@ Every test has website related data hardcoded; URL of the product page and title
 If there is the slightest change in these details, the hardcoded data in every test will need to be updated.
 If the product data is different between the test environments (for instance dev, test or stage), these tests cannot be reused.
 
+3. Code duplication
+Several of the test steps are repeated and duplicated between tests, such as clicking on specific links and filling out form data.
+
+The purpose and requirements of the tests were to test the features of the website. However despite making several adequately correct decisions, the resulting test suite is unstable.
+Here are some ways to expose the instability(flakiness) of these tests:
+1. Put an @Ignore on the first test and run the second one only
+    The second test will fail on the line of code: userName.sendKeys(purchaseEmail); because purchaseEmail has not been defined by the first test.
+2. Run the third test alone without running the first two
+    The third test will fail on the line of code: userName.sendKeys(purchaseEmail); because purchaseEmail has not been defined by the first test.
+3. Decrease the seconds in the pauses that use Thread.sleep
+    Any of the tests may fail because the pauses were not enough of a wait. This is expected, specially of the website/webpage performance deteriorates due to load or some other reason. Which means this is not a best practice to lessen the time to speed up the tests.
+
