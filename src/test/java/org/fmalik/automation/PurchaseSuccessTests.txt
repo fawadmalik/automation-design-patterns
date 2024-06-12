@@ -52,4 +52,10 @@ Refactoring using best practices
 The code in the tests made sense when they were written let's examine how fragile they are as they can potentially fail at the slightest provocation.
 So far the mistakes in the tests that need attention are:
 1. Test on test dependency
-if the first test does not run or fails for some reason, then the second one won't authenticate and will fail even though it should not.
+if the first test does not run or fails for some reason, then the second one won't authenticate and will fail and the third one will fail order verification.
+
+2. Hard-coded test data
+Every test has website related data hardcoded; URL of the product page and title of the product being tested are put in the test steps.
+If there is the slightest change in these details, the hardcoded data in every test will need to be updated.
+If the product data is different between the test environments (for instance dev, test or stage), these tests cannot be reused.
+
