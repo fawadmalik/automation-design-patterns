@@ -247,6 +247,6 @@ public class PurchaseSuccessTests {
     }
 
     private String GetUserPasswordFromDB(String username) {
-        return "@purlSQzt%%DYBnLClhaoG6$";
+        return "@purISQzt%%DYBnLCIhaoG6$";
     }
 }
