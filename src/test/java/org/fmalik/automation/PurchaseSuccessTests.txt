@@ -47,3 +47,9 @@ The second test will:
 - extract the generated order number displayed on the success order page at the end of the test.
 
 This captured orderd number will be used in the third test to verify that the information is displayed correctly in the "My Account" section.
+
+Refactoring using best practices
+The code in the tests made sense when they were written let's examine how fragile they are as they can potentially fail at the slightest provocation.
+So far the mistakes in the tests that need attention are:
+1. Test on test dependency
+if the first test does not run or fails for some reason, then the second one won't authenticate and will fail even though it should not.
