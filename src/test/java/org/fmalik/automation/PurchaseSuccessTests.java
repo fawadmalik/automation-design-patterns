@@ -215,7 +215,7 @@ public class PurchaseSuccessTests {
         WebElement myAccountLink = driver.findElement(By.linkText("My account"));
         myAccountLink.click();
 
-        WebElement userName = driver.findElement(By.id("username"));purchaseEmail = "info@berlinspaceflowers.com";
+        WebElement userName = driver.findElement(By.id("username"));
         userName.sendKeys(purchaseEmail);
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys(GetUserPasswordFromDB(purchaseEmail));
