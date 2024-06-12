@@ -68,6 +68,11 @@ Here are some ways to expose the instability(flakiness) of these tests:
     The second test will fail on the line of code: userName.sendKeys(purchaseEmail); because purchaseEmail has not been defined by the first test.
 2. Run the third test alone without running the first two
     The third test will fail on the line of code: userName.sendKeys(purchaseEmail); because purchaseEmail has not been defined by the first test.
+    Even if you run the first test to set purchaseEmail, third test will fail because without the second test Order # will not be set.
+    The test will fail the last assertion: Assert.assertEquals(expectedMessage, orderName.getText());
+    java.lang.AssertionError:
+    Expected :Order #6931
+    Actual   :Order #null
 3. Decrease the seconds in the pauses that use Thread.sleep
     Any of the tests may fail because the pauses were not enough of a wait. This is expected, specially of the website/webpage performance deteriorates due to load or some other reason. Which means this is not a best practice to lessen the time to speed up the tests.
 

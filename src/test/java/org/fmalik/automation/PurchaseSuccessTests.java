@@ -215,7 +215,7 @@ public class PurchaseSuccessTests {
         WebElement myAccountLink = driver.findElement(By.linkText("My account"));
         myAccountLink.click();
 
-        WebElement userName = driver.findElement(By.id("username"));
+        WebElement userName = driver.findElement(By.id("username"));purchaseEmail = "info@berlinspaceflowers.com";
         userName.sendKeys(purchaseEmail);
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys(GetUserPasswordFromDB(purchaseEmail));
@@ -227,7 +227,7 @@ public class PurchaseSuccessTests {
             throw new RuntimeException(e);
         }
 
-        WebElement orders = driver.findElement(By.xpath("//button[@name='login']"));
+        WebElement orders = driver.findElement(By.linkText("Orders"));
         orders.click();
         try {
             Thread.sleep(5000);
