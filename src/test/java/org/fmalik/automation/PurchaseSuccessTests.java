@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class PurchaseSuccessTests {
@@ -29,7 +30,7 @@ public class PurchaseSuccessTests {
         driver.quit();
     }
 
-    @Test
+    @Test(priority = 1)
     public void verifyPurchaseSuccessWithNewClient(){
         driver.navigate().to("http://demos.bellatrix.solutions/");
         System.out.println("Title: " + driver.getTitle());
@@ -208,7 +209,44 @@ public class PurchaseSuccessTests {
         purchaseOrderNumber = orderNumber.getText();
     }
 
+    @Test(priority = 3)
+    public void verifyCorrectOrderDataDisplayedInMyAccountOrderSection(){
+        driver.navigate().to("http://demos.bellatrix.solutions/");
+        WebElement myAccountLink = driver.findElement(By.linkText("My account"));
+        myAccountLink.click();
+
+        WebElement userName = driver.findElement(By.id("username"));
+        userName.sendKeys(purchaseEmail);
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys(GetUserPasswordFromDB(purchaseEmail));
+        WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
+        loginButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        WebElement orders = driver.findElement(By.xpath("//button[@name='login']"));
+        orders.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        List<WebElement> viewButtons = driver.findElements(By.linkText("View"));
+        viewButtons.get(0).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement orderName = driver.findElement(By.xpath("//h1"));
+        String expectedMessage = String.format("Order #%s", purchaseOrderNumber);
+        Assert.assertEquals(expectedMessage, orderName.getText());
+    }
+
     private String GetUserPasswordFromDB(String username) {
-        return "abc1234";
+        return "@purlSQzt%%DYBnLClhaoG6$";
     }
 }
