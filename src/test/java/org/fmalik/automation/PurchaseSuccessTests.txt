@@ -76,3 +76,8 @@ Here are some ways to expose the instability(flakiness) of these tests:
 3. Decrease the seconds in the pauses that use Thread.sleep
     Any of the tests may fail because the pauses were not enough of a wait. This is expected, specially of the website/webpage performance deteriorates due to load or some other reason. Which means this is not a best practice to lessen the time to speed up the tests.
 
+Executing/Running the tests
+When running tests as a suite or running the test class, the order of execution matters.
+The order is defined through the priority attribute of the @Test annotation on the test method. So when running the
+whole class, execution order will follow the priority attribute. Smaller the priority value, higher will be the
+test priority and will be executed first. So if executing manually the priority should be honoured, otherwise tests 2 and 3 will fail.
