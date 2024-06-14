@@ -103,3 +103,13 @@ Therefore, mixing is not recommended because things get more complicated when us
 
 - Replace duplicated code with reusable methods
 
+### Using Design Patterns
+First up is the implementation of the Decorator design pattern for IWebElement. This will
+enable us to optimize the IWebElement's actions such as typing or clicking. We will use it to attach additional responsibilities to an object dynamically.
+The decorator pattern is a flexible alternative to subclassing in order to extend functionality.
+The steps involved are:
+- Wrap the component with several decorators
+- Change the behaviour of its component by adding new functionality before and/or after the component method is called
+- The decorator class mirrors the type of component it decorates
+- and ofcourse provides an alternative to subclassing for extending behavior
+
