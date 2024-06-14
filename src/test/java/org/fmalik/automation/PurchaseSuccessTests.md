@@ -113,3 +113,9 @@ The steps involved are:
 - The decorator class mirrors the type of component it decorates
 - and ofcourse provides an alternative to subclassing for extending behavior
 
+#### Participants
+- Component
+- Decorator
+- ConcreteComponent
+- ConcreteDecorator
+
