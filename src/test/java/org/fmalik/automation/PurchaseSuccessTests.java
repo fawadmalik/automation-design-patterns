@@ -69,18 +69,10 @@ public class PurchaseSuccessTests {
         WebElement billingEmail = waitAndFindElement(By.id("billing_email"));
         billingEmail.sendKeys("info@berlinspaceflowers.com");
         purchaseEmail = "info@berlinspaceflowers.com";
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement placeOrderButton = waitAndFindElement(By.id("place_order"));
         placeOrderButton.click();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(10);
         WebElement recievedMessage = waitAndFindElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(recievedMessage.getText(), "Order received");
     }
@@ -98,18 +90,10 @@ public class PurchaseSuccessTests {
         WebElement loginHereLink = waitAndFindElement(By.linkText("Click here to login"));
         loginHereLink.click();
         login(purchaseEmail);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement placeOrderButton = waitAndFindElement(By.id("place_order"));
         placeOrderButton.click();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(10);
         WebElement recievedMessage = waitAndFindElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(recievedMessage.getText(), "Order received");
         WebElement orderNumber = waitAndFindElement(By.xpath("//*[@id='post-7']//li[1]/strong"));
@@ -122,26 +106,13 @@ public class PurchaseSuccessTests {
         WebElement myAccountLink = waitAndFindElement(By.linkText("My account"));
         myAccountLink.click();
         login(purchaseEmail);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
+        sleep(5);
         WebElement orders = waitAndFindElement(By.linkText("Orders"));
         orders.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         List<WebElement> viewButtons = waitAndFindElements(By.linkText("View"));
         viewButtons.get(0).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement orderName = waitAndFindElement(By.xpath("//h1"));
         String expectedMessage = String.format("Order #%s", purchaseOrderNumber);
         Assert.assertEquals(expectedMessage, orderName.getText());
@@ -167,11 +138,7 @@ public class PurchaseSuccessTests {
     }
 
     private void login(String userName){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement userNameTextField = waitAndFindElement(By.id("username"));
         userNameTextField.sendKeys(userName);
         WebElement passwordField = waitAndFindElement(By.id("password"));
@@ -186,11 +153,7 @@ public class PurchaseSuccessTests {
         couponCodeTextField.sendKeys("happybirthday");
         WebElement applyCouponButton = waitAndFindElement(By.cssSelector("[value*='Apply coupon']"));
         applyCouponButton.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement messageAlert = waitAndFindElement(By.cssSelector("[class*='woocommerce-message']"));
         Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
     }
@@ -198,21 +161,13 @@ public class PurchaseSuccessTests {
     private void increaseProductQuantity() {
         WebElement quantityBox = waitAndFindElement(By.cssSelector("[class*='input-text qty text']"));
         quantityBox.clear();
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         quantityBox.sendKeys("2");
 
         waitToBeClickable(By.cssSelector("[value*='Update cart']"));
         WebElement updateCart = waitAndFindElement(By.cssSelector("[value*='Update cart']"));
         updateCart.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        sleep(5);
         WebElement totalSpan = waitAndFindElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals("114.00€", totalSpan.getText());
     }
@@ -220,12 +175,16 @@ public class PurchaseSuccessTests {
     private void addRocketToShoppingCart() {
         WebElement addToCartFalcon9 = waitAndFindElement(By.cssSelector("*[data-product_id*='28']"));
         addToCartFalcon9.click();
+        sleep(10);
+        WebElement viewCartButton = waitAndFindElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
+        viewCartButton.click();
+    }
+
+    private void sleep(int seconds) {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(seconds * 1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        WebElement viewCartButton = waitAndFindElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
-        viewCartButton.click();
     }
 }
