@@ -115,11 +115,6 @@ The steps involved are:
 
 #### Participants
 - Component
-- Decorator
-- ConcreteComponent
-- ConcreteDecorator
-
-- Component
 Defines the interface for objects that can have responsibilities added to them dynamically
 - Decorator
 Implements the same interface (abstratct class) as the component they will decorate. It has a HAS-A relationship 
@@ -129,3 +124,19 @@ The object that is going to be enhanced dynamically. It inherits the Component
 - ConcreteDecorator
 Decorators can enhance the state of the component. They can add new methods. The new behavior is typically
 added before and/or after an existing method in the component
+
+Note: Implementation of this pattern invovles the Composition. Composition over inheritance (oe composite reuse principle) in
+OOP is the principle where classes should achieve polymorphic behavios and code reuse by their composition (by containing
+an instance of other classes that implement the desired functionality) rather than inheritance from the base or parent class. 
+This is especially important where languages like java do not allow multiple inheritance.
+
+#### Implementation
+1. Create the Component
+    This is the interface for alla element objects
+    Implement the pattern for the IWebElement, in order to optimize the wen element's actions such as typing or clicking
+2. Create the ConcreteComponent
+   Create the class called WebCoreElement that derives from the abstract Element class
+   The constructor for the WebCoreElement accepts the WebElement, which is the component. Using composition by having an 
+   instance of the native WebElement and keeping a reference to the By locator. The reference to the WebElement is later
+   used in creating the WebDriverWait for using Explicit wait condition in the Click method
+3. 
