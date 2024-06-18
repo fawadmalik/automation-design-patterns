@@ -119,3 +119,13 @@ The steps involved are:
 - ConcreteComponent
 - ConcreteDecorator
 
+- Component
+Defines the interface for objects that can have responsibilities added to them dynamically
+- Decorator
+Implements the same interface (abstratct class) as the component they will decorate. It has a HAS-A relationship 
+with the object it is extending, so the Component has an instance variable that holds a reference to the latter
+- ConcreteComponent
+The object that is going to be enhanced dynamically. It inherits the Component
+- ConcreteDecorator
+Decorators can enhance the state of the component. They can add new methods. The new behavior is typically
+added before and/or after an existing method in the component
