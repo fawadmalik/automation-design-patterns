@@ -1,4 +1,4 @@
-package org.fmalik.automation.badstartercode;
+package org.fmalik.automation.badStarterCode.v1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -220,8 +220,7 @@ public class PurchaseSuccessTests {
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys(GetUserPasswordFromDB(purchaseEmail));
         WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
-        loginButton.click();
-        try {
+        loginButton.click();        try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
