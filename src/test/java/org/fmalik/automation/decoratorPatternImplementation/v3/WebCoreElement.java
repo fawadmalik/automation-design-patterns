@@ -67,6 +67,6 @@ public class WebCoreElement extends Element{
 
     private void waitToBeClickable(By by_ref){
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-        webDriverWait.until((ExpectedConditions.elementToBeClickable(by_ref)))
+        webDriverWait.until((ExpectedConditions.elementToBeClickable(by_ref)));
     }
 }
