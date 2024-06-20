@@ -6,7 +6,7 @@ public class LogElement extends ElementDecorator{
     public LogElement(Element element) {
         super(element);
     }
-    
+
     @Override
     public String getText(){
         System.out.println(String.format("Element Text=%s", element.getText()));
