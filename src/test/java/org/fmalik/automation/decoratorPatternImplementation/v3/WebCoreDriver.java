@@ -54,7 +54,7 @@ public class WebCoreDriver extends Driver{
     }
 
     @Override
-    public void gotToUrl(String url) {
+    public void goToUrl(String url) {
         webDriver.navigate().to(url);
     }
 

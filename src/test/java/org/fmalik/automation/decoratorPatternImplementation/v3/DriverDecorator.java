@@ -22,8 +22,8 @@ public class DriverDecorator extends Driver{
     }
 
     @Override
-    public void gotToUrl(String url) {
-        driver.gotToUrl(url);
+    public void goToUrl(String url) {
+        driver.goToUrl(url);
     }
 
     @Override
