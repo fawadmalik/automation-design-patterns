@@ -140,3 +140,8 @@ This is especially important where languages like java do not allow multiple inh
    instance of the native WebElement and keeping a reference to the By locator. The reference to the WebElement is later
    used in creating the WebDriverWait for using Explicit wait condition in the Click method
 3. 
+#### Test independence-isolation principle
+We have added a test with decorator pattern implementation
+and we will add the remaining 2, but the last 2 are all dependent on earlier tests.
+According to the test independence-isolation principle, each test should be independent and self-sufficient.
+
