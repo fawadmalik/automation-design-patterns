@@ -151,5 +151,13 @@ data or leave the system in an unexpected state, it will be harder to fail or cr
 - Faster test development: Speed up the long-term maintenance and test development since a long analysis session is not required
 - to determine the effects of changing or deleting the test dependency.
 - Random run order: Allows running the tests in random order in different groups.
-- Parallel testing: This will make tests run independently in parallel and not have to rely on other tests to set up the
-- required data.
+- Parallel testing: This will make tests run independently in parallel and not have to rely on other tests to set up the required data.
+
+There's a need to make the second and third tests independent of test 1.
+If a unique email is created every time by using a method such as:
+private String generateUniqueEmail(){
+    return String.format("%s@berlinspaceflowers.com", UUID.randomUUID().toString());
+}
+a 128-bit long value such as a GUID generated here is unique for all practical purposes.
+
+Another approach would be to generate the data (orders and users) using internal API services before each test is run.
