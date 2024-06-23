@@ -145,3 +145,11 @@ We have added a test with decorator pattern implementation
 and we will add the remaining 2, but the last 2 are all dependent on earlier tests.
 According to the test independence-isolation principle, each test should be independent and self-sufficient.
 
+Benefits
+- Resilience: If a test is not dependent on another test or 3rd party services that fail to set up or delete the required
+data or leave the system in an unexpected state, it will be harder to fail or crash.
+- Faster test development: Speed up the long-term maintenance and test development since a long analysis session is not required
+- to determine the effects of changing or deleting the test dependency.
+- Random run order: Allows running the tests in random order in different groups.
+- Parallel testing: This will make tests run independently in parallel and not have to rely on other tests to set up the
+- required data.
