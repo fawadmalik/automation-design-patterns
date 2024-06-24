@@ -161,3 +161,18 @@ private String generateUniqueEmail(){
 a 128-bit long value such as a GUID generated here is unique for all practical purposes.
 
 Another approach would be to generate the data (orders and users) using internal API services before each test is run.
+
+#### Finally
+A start to writing selenium automation tests is without using any complex design patterns and using a simple WebDriver syntax. Such tests tend to be unstable, with poor readability.
+An easy refactoring strategy is to use WebDriverWait class to stabilize the tests, demonstrated in the code.
+A more involved strategy to promote code reuse by implementing the Decorator design pattern demostrated in the code.
+Simple factory design pattern???
+Another strategy is Test Independence-Isolation principle suggested but not implemented.
+
+Let's answer a few questions for improving understanding in this topic:
+1. Describe the common problems in automated tests using simple WebDriver syntax.
+2. Describe the use of the WebDriverWait class to wait for an element to exist on a webpage before using it in any way.
+3. Describe a way to wait for an element to be clickable
+4. Describe the participants in the Decorator design pattern.
+5. Describe the difference between implicit and explicit wait
+6. List the benefits of the Test Independence-Isolation principle.
