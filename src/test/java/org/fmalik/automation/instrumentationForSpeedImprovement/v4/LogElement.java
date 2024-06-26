@@ -1,4 +1,4 @@
-package org.fmalik.automation.org.fmalik.automation.decoratorPatternImplementation.v4;
+package org.fmalik.automation.instrumentationForSpeedImprovement.v4;
 
 public class LogElement extends ElementDecorator {
     public LogElement(Element element) {
