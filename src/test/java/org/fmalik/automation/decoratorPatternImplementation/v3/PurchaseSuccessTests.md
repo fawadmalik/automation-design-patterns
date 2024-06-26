@@ -104,6 +104,7 @@ Therefore, mixing is not recommended because things get more complicated when us
 - Replace duplicated code with reusable methods
 
 ### Using Design Patterns
+#### Decorator Pattern
 First up is the implementation of the Decorator design pattern for IWebElement. This will
 enable us to optimize the IWebElement's actions such as typing or clicking. We will use it to attach additional responsibilities to an object dynamically.
 The decorator pattern is a flexible alternative to subclassing in order to extend functionality.
@@ -113,7 +114,7 @@ The steps involved are:
 - The decorator class mirrors the type of component it decorates
 - and ofcourse provides an alternative to subclassing for extending behavior
 
-#### Participants
+##### Participants
 - Component
 Defines the interface for objects that can have responsibilities added to them dynamically
 - Decorator
@@ -130,7 +131,7 @@ OOP is the principle where classes should achieve polymorphic behavios and code 
 an instance of other classes that implement the desired functionality) rather than inheritance from the base or parent class. 
 This is especially important where languages like java do not allow multiple inheritance.
 
-#### Implementation
+##### Implementation
 1. Create the Component
     This is the interface for alla element objects
     Implement the pattern for the IWebElement, in order to optimize the wen element's actions such as typing or clicking
@@ -139,7 +140,15 @@ This is especially important where languages like java do not allow multiple inh
    The constructor for the WebCoreElement accepts the WebElement, which is the component. Using composition by having an 
    instance of the native WebElement and keeping a reference to the By locator. The reference to the WebElement is later
    used in creating the WebDriverWait for using Explicit wait condition in the Click method
-3. 
+3. Next
+
+#### Creational Pattern
+The simple Factory Design pattern is a form of Creational design pattern. In its simplest form, compared to the more involved
+Factory method or Abstract Factory design patterns, the WebCoreDriver class as a method that returns different types of
+browser objects based on input. It solves the design problems related to basic form of object creation, by centralizing
+object creation belonging to a certain type, using a simple design pattern. This will avoid design complexity.
+
+
 #### Test independence-isolation principle
 We have added a test with decorator pattern implementation
 and we will add the remaining 2, but the last 2 are all dependent on earlier tests.
