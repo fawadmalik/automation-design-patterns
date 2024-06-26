@@ -188,3 +188,9 @@ Let's answer a few questions for improving understanding in this topic:
 4. Describe the participants in the Decorator design pattern.
 5. Describe the difference between implicit and explicit wait
 6. List the benefits of the Test Independence-Isolation principle.
+
+### Strategies for speeding up tests
+Let's attempt to make the existing tests faster and less flaky. 
+#### Instrumentation
+Instrumentation of the test code will help find and define the likely improvement points.
+Next target the login method for speed improvement
