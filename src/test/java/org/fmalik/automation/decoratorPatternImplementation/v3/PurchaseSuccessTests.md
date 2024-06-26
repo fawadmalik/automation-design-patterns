@@ -140,7 +140,10 @@ This is especially important where languages like java do not allow multiple inh
    The constructor for the WebCoreElement accepts the WebElement, which is the component. Using composition by having an 
    instance of the native WebElement and keeping a reference to the By locator. The reference to the WebElement is later
    used in creating the WebDriverWait for using Explicit wait condition in the Click method
-3. Next
+3. Create Element decorator
+4. Create WebElement decorator implementation
+5. Create Driver decorator
+6. Create WebDriver decorator implementation
 
 #### Creational Pattern
 The simple Factory Design pattern is a form of Creational design pattern. In its simplest form, compared to the more involved
