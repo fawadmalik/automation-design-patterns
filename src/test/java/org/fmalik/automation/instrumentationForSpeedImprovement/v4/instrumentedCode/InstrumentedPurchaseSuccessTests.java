@@ -1,6 +1,10 @@
-package org.fmalik.automation.instrumentationForSpeedImprovement.v4;
+package org.fmalik.automation.instrumentationForSpeedImprovement.v4.instrumentedCode;
 
 import com.google.common.base.Stopwatch;
+import org.fmalik.automation.instrumentationForSpeedImprovement.v4.Browser;
+import org.fmalik.automation.instrumentationForSpeedImprovement.v4.Driver;
+import org.fmalik.automation.instrumentationForSpeedImprovement.v4.LoggingDriver;
+import org.fmalik.automation.instrumentationForSpeedImprovement.v4.WebCoreDriver;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class InstrumentedCode {
+public class InstrumentedPurchaseSuccessTests {
     private Driver driver;
     private static String purchaseEmail;
     private static String purchaseOrderNumber;
