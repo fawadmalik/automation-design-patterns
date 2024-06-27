@@ -2,6 +2,7 @@ package org.fmalik.automation.instrumentationForSpeedImprovement.v4;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -77,5 +78,17 @@ public class WebCoreDriver extends Driver {
             elements.add(element);
         }
         return elements;
+    }
+
+    @Override
+    public void waitForAjax() {
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
+        webDriverWait.until(d -> (Boolean) javascriptExecutor.executeScript("return window.jQuery != undefined && jQuery.active == 0"));
+    }
+
+    @Override
+    public void waitUntilPageLoadsCompletely() {
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
+        webDriverWait.until(d -> javascriptExecutor.executeScript("return document.readyState").toString().equals("complete"));
     }
 }

@@ -209,4 +209,24 @@ Running the instrumented code a number of times will produce a number of key mea
 In most test suites the login tests are simply to validate login and serve as a starting point for tests that
 need to login for the rest of the workflow
 One optimization is to use authentication cookies to speed up login.
-Ususally thi sis implemented by calling an internal web API to generte a value of the authentication cookie. 
+Usually this is implemented by calling an internal web API to generate a value of the authentication cookie.
+
+#### Waiting for All AJAX Requests Completion
+jQuery is one of the JavaScript libraries in popular use that eases the work with asynchronous JavaScript.
+Using some of its methods will help get the total count of the currently active async requests.
+jQuery.active returns 0 if the page is fully loaded.
+It will return a positive number if there are still executing requests.
+WebDriver's JavascriptExecutor class provides APIs for executing JavaScript code within the current web page.
+The method is JavascriptExecutor.executeScript(...)
+Note:
+- If the SUT website does not use jQuery, this method will not work.
+- The wait for ajax method must be used after the load event, because the call will throw UncaughtTypeError if jQuery is not defined.
+  - _UncaughtTypeError: Cannot read property 'active' of undefined._
+
+In WebDriver, the Until method in the Wait class is simply a loop that executes
+the contents of the code block passed to it until the code returns a true value.
+
+The JavaScript returns jQuery.active count.
+In the case of the WaitForAjax method, the exit loop condition is reached when there are 0 active AJAX requests.
+If the conditional returns true, all the AJAX requests have finished, and we are ready to move to the next step.
+Use the new WaitForAjax method when there's a need to wait for async requests.
