@@ -189,8 +189,18 @@ Let's answer a few questions for improving understanding in this topic:
 5. Describe the difference between implicit and explicit wait
 6. List the benefits of the Test Independence-Isolation principle.
 
-### Strategies for speeding up tests
+### Version 4: Speeding up tests
 Let's attempt to make the existing tests faster and less flaky. 
 #### Instrumentation
-Instrumentation of the test code will help find and define the likely improvement points.
-Next target the login method for speed improvement
+Instrumenting the Test Code to Find Possible Points for Optimization:
+Optimization to make the tests faster and
+less flaky ( fails and passes intermittently )
+Faster tests will integrate better in CI
+- faster turn around of results
+- prompt finding of problems in the product.
+
+Targets for this version:
+- How to Wait for AJAX in tests?
+- Optimize Browser Initialization- Observer Design Pattern
+- Isolated Browser Initialization for Each Test
+- Black Hole Proxy Approach
