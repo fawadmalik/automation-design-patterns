@@ -204,3 +204,9 @@ Targets for this version:
 - Optimize Browser Initialization- Observer Design Pattern
 - Isolated Browser Initialization for Each Test
 - Black Hole Proxy Approach
+
+Running the instrumented code a number of times will produce a number of key measurements
+In most test suites the login tests are simply to validate login and serve as a starting point for tests that
+need to login for the rest of the workflow
+One optimization is to use authentication cookies to speed up login.
+Ususally thi sis implemented by calling an internal web API to generte a value of the authentication cookie. 
