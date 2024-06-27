@@ -92,7 +92,7 @@ public class InstrumentedCode {
         placeOrderButton.click();
 
         Thread.sleep(10000);
-        var receivedMessage = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/main/div/header/h1"));
+        var receivedMessage = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(receivedMessage.getText(), "Order received");
 
         System.out.printf("end completePurchaseSuccessfully_whenNewClient: %d", stopwatch.elapsed(TimeUnit.SECONDS));
