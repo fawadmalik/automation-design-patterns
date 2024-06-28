@@ -1,4 +1,4 @@
-package org.fmalik.automation.instrumentationForSpeedImprovement.v4;
+package org.fmalik.automation.speedImprovements.v4;
 
 public enum Browser {
     CHROME,

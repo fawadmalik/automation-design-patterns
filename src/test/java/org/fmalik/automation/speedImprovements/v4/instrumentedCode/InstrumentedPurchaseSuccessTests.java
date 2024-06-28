@@ -1,34 +1,43 @@
-package org.fmalik.automation.instrumentationForSpeedImprovement.v4.waitForAjax;
+package org.fmalik.automation.speedImprovements.v4.instrumentedCode;
 
-import org.fmalik.automation.instrumentationForSpeedImprovement.v4.*;
+import com.google.common.base.Stopwatch;
+import org.fmalik.automation.speedImprovements.v4.Browser;
+import org.fmalik.automation.speedImprovements.v4.Driver;
+import org.fmalik.automation.speedImprovements.v4.LoggingDriver;
+import org.fmalik.automation.speedImprovements.v4.WebCoreDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AjaxSupportedPurchaseSuccessTests {
+import java.util.concurrent.TimeUnit;
+
+public class InstrumentedPurchaseSuccessTests {
+    private Driver driver;
     private static String purchaseEmail;
     private static String purchaseOrderNumber;
-    private Driver driver;
+    private static Stopwatch stopwatch;
 
     @BeforeMethod
     public void testInit() {
+        stopwatch = Stopwatch.createStarted();
         driver = new LoggingDriver(new WebCoreDriver());
         driver.start(Browser.CHROME);
+
+        System.out.printf("end browser init: %d", stopwatch.elapsed(TimeUnit.SECONDS));
     }
 
     @AfterMethod
-    public void testCleanup() throws InterruptedException {
+    public void testCleanup() {
         driver.quit();
+        System.out.printf("afterTest: %d", stopwatch.elapsed(TimeUnit.SECONDS));
+        stopwatch.stop();
     }
 
     @Test(priority = 1)
     public void completePurchaseSuccessfully_whenNewClient() throws InterruptedException {
+        System.out.printf("start completePurchaseSuccessfully_whenNewClient: %d", stopwatch.elapsed(TimeUnit.SECONDS));
         driver.goToUrl("http://demos.bellatrix.solutions/");
         var addToCartFalcon9 = driver.findElement(By.cssSelector("[data-product_id*='28']"));
         addToCartFalcon9.click();
@@ -39,23 +48,21 @@ public class AjaxSupportedPurchaseSuccessTests {
         couponCodeTextField.typeText("happybirthday");
         var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
         applyCouponButton.click();
-        driver.waitForAjax();
+        Thread.sleep(4000);
         var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
         Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
 
         var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
         quantityBox.typeText("2");
-        driver.waitForAjax();
 
         var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
         updateCart.click();
-        driver.waitForAjax();
+        Thread.sleep(4000);
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals("114.00€", totalSpan.getText());
 
-        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
-        driver.waitUntilPageLoadsCompletely();
 
         var billingFirstName = driver.findElement(By.id("billing_first_name"));
         billingFirstName.typeText("Anton");
@@ -84,18 +91,21 @@ public class AjaxSupportedPurchaseSuccessTests {
         purchaseEmail = "info@berlinspaceflowers.com";
 
         // This pause will be removed when we introduce a logic for waiting for AJAX requests.
-        driver.waitForAjax();
+        Thread.sleep(5000);
         var placeOrderButton = driver.findElement(By.id("place_order"));
         placeOrderButton.click();
 
-        driver.waitForAjax();
-//        var receivedMessage = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/main/div/header/h1"));
+        Thread.sleep(10000);
         var receivedMessage = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div/div/main/article/header/h1"));
         Assert.assertEquals(receivedMessage.getText(), "Order received");
+
+        System.out.printf("end completePurchaseSuccessfully_whenNewClient: %d", stopwatch.elapsed(TimeUnit.SECONDS));
     }
 
     @Test(priority = 2)
     public void completePurchaseSuccessfully_whenExistingClient() throws InterruptedException {
+        System.out.printf("start completePurchaseSuccessfully_whenExistingClient: %d", stopwatch.elapsed(TimeUnit.SECONDS));
+
         driver.goToUrl("http://demos.bellatrix.solutions/");
 
         var addToCartFalcon9 = driver.findElement(By.cssSelector("[data-product_id*='28']"));
@@ -108,33 +118,32 @@ public class AjaxSupportedPurchaseSuccessTests {
         var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
         applyCouponButton.click();
         var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
-        driver.waitForAjax();
+        Thread.sleep(4000);
         Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
 
         var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
         quantityBox.typeText("2");
-        driver.waitForAjax();
         var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
         updateCart.click();
-        driver.waitForAjax();
+        Thread.sleep(4000);
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals(totalSpan.getText(), "114.00€");
 
         var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
-        driver.waitUntilPageLoadsCompletely();
 
         var loginHereLink = driver.findElement(By.linkText("Click here to login"));
         loginHereLink.click();
         var userName = driver.findElement(By.id("username"));
-        driver.waitForAjax();
+        Thread.sleep(5000);
         userName.typeText(purchaseEmail);
         var password = driver.findElement(By.id("password"));
         password.typeText(GetUserPasswordFromDb(purchaseEmail));
         var loginButton = driver.findElement(By.xpath("//button[@name='login']"));
         loginButton.click();
 
-        driver.waitForAjax();
+        // This pause will be removed when we introduce a logic for waiting for AJAX requests.
+        Thread.sleep(5000);
         var placeOrderButton = driver.findElement(By.id("place_order"));
         placeOrderButton.click();
 
@@ -143,16 +152,19 @@ public class AjaxSupportedPurchaseSuccessTests {
 
         var orderNumber = driver.findElement(By.xpath("//*[@id='post-7']//li[1]/strong"));
         purchaseOrderNumber = orderNumber.getText();
+
+        System.out.printf("end completePurchaseSuccessfully_whenExistingClient: %d", stopwatch.elapsed(TimeUnit.SECONDS));
     }
 
     @Test(priority = 3)
     public void correctOrderDataDisplayed_whenNavigateToMyAccountOrderSection() throws InterruptedException {
+        System.out.printf("start correctOrderDataDisplayed_whenNavigateToMyAccountOrderSection: %d", stopwatch.elapsed(TimeUnit.SECONDS));
         driver.goToUrl("http://demos.bellatrix.solutions/");
 
         var myAccountLink = driver.findElement(By.linkText("My account"));
         myAccountLink.click();
         var userName = driver.findElement(By.id("username"));
-        driver.waitForAjax();
+        Thread.sleep(4000);
         userName.typeText(purchaseEmail);
         var password = driver.findElement(By.id("password"));
         password.typeText(GetUserPasswordFromDb(GetUserPasswordFromDb(purchaseEmail)));
@@ -168,6 +180,8 @@ public class AjaxSupportedPurchaseSuccessTests {
         var orderName = driver.findElement(By.xpath("//h1"));
         String expectedMessage = String.format("Order #%s", purchaseOrderNumber);
         Assert.assertEquals(expectedMessage, orderName.getText());
+
+        System.out.printf("end correctOrderDataDisplayed_whenNavigateToMyAccountOrderSection: %d", stopwatch.elapsed(TimeUnit.SECONDS));
     }
 
     private String GetUserPasswordFromDb(String userName) {
