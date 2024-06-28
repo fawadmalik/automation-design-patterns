@@ -226,7 +226,29 @@ Note:
 In WebDriver, the Until method in the Wait class is simply a loop that executes
 the contents of the code block passed to it until the code returns a true value.
 
-The JavaScript returns jQuery.active count.
+The JavaScript returns 'jQuery.active' count.
 In the case of the WaitForAjax method, the exit loop condition is reached when there are 0 active AJAX requests.
 If the conditional returns true, all the AJAX requests have finished, and we are ready to move to the next step.
 Use the new WaitForAjax method when there's a need to wait for async requests.
+
+The test execution time can also be improved by optimizing the browser initialization.
+Also, after the click of the ‘Proceed to checkout’ button there's need for a more special wait logic that will replace the hard pause.
+There we need to wait for the entire page to load. Since there aren’t asynchronous requests, the WaitForAjax method 
+won’t work in this case. Therefore, we can add one more helper function to our WebDriver decorator: waitUntilPageLoadsCompletely(...)
+
+Optimize Browser Initialization- Observer Design Pattern
+The repeating and time-consuming browser initialization ca be optimized as it can take up to 2 seconds per test.
+Currently, the browser is set to start and close for each test. One optimization can be to reuse the browser so that
+it starts at the beginning of the whole test suite, and closes it after all tests have finished their execution.
+This will bring considerable execution time improvement
+However, if there's still need to restart the browser before some of the tests, we will need to expand the solution, where
+by adding the ability to configure this defaukt behavior per test class or test method.
+Let's use the Observer design pattern for this improvement.
+Observer Design Pattern
+The Observer design pattern defines a one-to-many relation between objects, so that when one object changes its state, all 
+dependents are notified and updated automatically. Benefits:
+- Strives for loosely coupled designs between objects that interact.
+- Allows you to send data to many other objects in a very efficient manner.
+- No modification needs to be done to the subject in case you need to add new observers.
+- You can add and remove observers at any time.
+- The order of Observer notifications is unpredictable.
