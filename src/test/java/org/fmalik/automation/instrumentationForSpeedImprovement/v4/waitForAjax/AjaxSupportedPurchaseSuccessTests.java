@@ -2,6 +2,7 @@ package org.fmalik.automation.instrumentationForSpeedImprovement.v4.waitForAjax;
 
 import org.fmalik.automation.instrumentationForSpeedImprovement.v4.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -52,7 +53,7 @@ public class AjaxSupportedPurchaseSuccessTests {
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals("114.00€", totalSpan.getText());
 
-        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
         driver.waitUntilPageLoadsCompletely();
 

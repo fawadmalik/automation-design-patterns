@@ -12,4 +12,5 @@ public abstract class Driver {
     public abstract List<Element> findElements(By locator);
     public abstract void waitForAjax();
     public abstract void waitUntilPageLoadsCompletely();
+    public abstract Element findElementAndMoveToIt(By locator);
 }
