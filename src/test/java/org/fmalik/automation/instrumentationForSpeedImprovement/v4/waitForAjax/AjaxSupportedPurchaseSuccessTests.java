@@ -1,19 +1,19 @@
 package org.fmalik.automation.instrumentationForSpeedImprovement.v4.waitForAjax;
 
-import org.fmalik.automation.instrumentationForSpeedImprovement.v4.Browser;
-import org.fmalik.automation.instrumentationForSpeedImprovement.v4.Driver;
-import org.fmalik.automation.instrumentationForSpeedImprovement.v4.LoggingDriver;
-import org.fmalik.automation.instrumentationForSpeedImprovement.v4.WebCoreDriver;
+import org.fmalik.automation.instrumentationForSpeedImprovement.v4.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AjaxSupportedPurchaseSuccessTests {
-    private Driver driver;
     private static String purchaseEmail;
     private static String purchaseOrderNumber;
+    private Driver driver;
 
     @BeforeMethod
     public void testInit() {
