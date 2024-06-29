@@ -266,3 +266,15 @@ ITestBehaviorObserver interface. Each observer registers with a specific subject
 - BaseTest - The parent class for all test classes in the framework. Uses the TestExecutionSubject to
 extend its test execution capabilities via test method/class level defined attributes and concrete observers.
 
+#### Observer Design Pattern Implementation
+With our implementation, we will provide an easy way for automation engineers to add additional logic to the current test
+execution via class/test level attributes. For example, start and reuse the browser if the previous test hasn't failed.
+
+Here is one way to implement a typical or classic Observer pattern implementation
+However, there are other types of implementations through Events and Delegates.
+
+The Subject is the object that contains the state and controls it. So, there is only one subject with a state.
+The observers, on the other hand, use the state, even though they don’t own it. There are many observers, and they rely
+on the Subject to tell them when its state changes. So, there is a relationship between the one Subject and the many observers.
+Why not first look at the ISubject interface?
+
