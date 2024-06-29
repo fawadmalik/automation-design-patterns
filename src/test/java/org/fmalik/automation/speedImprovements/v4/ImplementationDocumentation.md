@@ -252,3 +252,17 @@ dependents are notified and updated automatically. Benefits:
 - No modification needs to be done to the subject in case you need to add new observers.
 - You can add and remove observers at any time.
 - The order of Observer notifications is unpredictable.
+
+#### The participants in this pattern are:
+- ITestExecutionSubject - Objects use this interface to register as observers and to remove
+themselves from being observers.
+- MSTestExecutionSubject - The concrete subject always implements the ITestExecutionSubject
+interface. In addition, to attach and detach methods, the specific subject implements different
+notification methods that are used to update all the subscribed observers whenever the state changes.
+- ITestBehaviorObserver - All potential observers need to implement the observer interface. The
+methods of this interface are called at different points, when the subject’s state changes.
+- OwnerTestBehaviorObserver - A concrete observer can be any class that implements
+ITestBehaviorObserver interface. Each observer registers with a specific subject to receive updates.
+- BaseTest - The parent class for all test classes in the framework. Uses the TestExecutionSubject to
+extend its test execution capabilities via test method/class level defined attributes and concrete observers.
+
