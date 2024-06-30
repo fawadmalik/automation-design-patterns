@@ -278,3 +278,13 @@ The observers, on the other hand, use the state, even though they don’t own it
 on the Subject to tell them when its state changes. So, there is a relationship between the one Subject and the many observers.
 Why not first look at the ISubject interface?
 
+There are  Attach and Detach methods that are used by the observer classes to associate themselves with the subject. The rest of the
+methods are invoked in the various steps of the test execution workflow to notify the observers about changes in the state
+of the subject. In order for the subject to be able to notify the observers, they need to implement
+the ITestBehaviorObserver interface where all notification methods are defined.
+
+The specific subject knows nothing about the implementations of the observers. It is working with a list of ITestBehaviorObserver objects.
+The Attach and Detach methods add and remove observers to/from the collection. In this classic implementation of the observer
+design pattern, the observers are responsible to associate themselves with the subject class. Not all the observers need
+to implement all the notification methods. In order to support this requirement, we are going to add a base class that is
+going to implement the ITestBehaviorObserver interface.
