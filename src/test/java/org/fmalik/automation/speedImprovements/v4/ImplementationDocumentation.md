@@ -44,8 +44,8 @@ It could mean any one or all of the following:
 
 ### Second Test : verifyPurchaseSuccessWithExistingClient
 The second test will:
-- reuse most of the test steps from the forst tests because teh order placement steps are the same
-- reuse the email from the first test and repeat roughtly the steps from the first test. This will test prefilling of all user info fields and verify complete the purchase.
+- reuse most of the test steps from the first tests because teh order placement steps are the same
+- reuse the email from the first test and repeat roughly the steps from the first test. This will test prefilling of all user info fields and verify complete the purchase.
 - extract the generated order number displayed on the success order page at the end of the test.
 
 This captured order number will be used in the third test to verify that the information is displayed correctly in the "My Account" section.
@@ -64,7 +64,7 @@ If the product data is different between the test environments (for instance dev
 3. Code duplication
 Several of the test steps are repeated and duplicated between tests, such as clicking on specific links and filling out form data.
 
-The purpose and requirements of the tests were to test the features of the website. However despite making several adequately correct decisions, the resulting test suite is unstable.
+The purpose and requirements of the tests were to test the features of the website. However, despite making several adequately correct decisions, the resulting test suite is unstable.
 Here are some ways to expose the instability(flakiness) of these tests:
 1. Put an @Ignore on the first test and run the second one only
     The second test will fail on the line of code: userName.sendKeys(purchaseEmail); because purchaseEmail has not been defined by the first test.
@@ -75,7 +75,7 @@ Here are some ways to expose the instability(flakiness) of these tests:
     java.lang.AssertionError:
     Expected :Order #6931
     Actual   :Order #null
-3. Decrease the seconds in the pauses that use Thread.sleep
+3. Decrease the seconds in the pauses that use "Thread.sleep"
     Any of the tests may fail because the pauses were not enough of a wait. This is expected, specially of the website/webpage performance deteriorates due to load or some other reason. Which means this is not a best practice to lessen the time to speed up the tests.
 
 ### Executing/Running the tests
@@ -91,14 +91,17 @@ We used pauses(Thread.sleep) to avoid NoSuchElementException when an element can
 
 This topic falls under synchronization.
 One way to handle synchronization is through global implicit wait timeout
-driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); 
+```
+driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+```
+ 
 
 Sometimes you may need a larger wait interval that implicit wait.
 One option is to increase the global implicit timeout and affect all existing tests.
 Another option is to mix implicit d explicit wait.
 
 However, the best practices warn against it. Reason being that implicit waits are often implemented on the remote side of the WebDriver system. That means that it is built into the browser WebDriver executable. It could change with the implementation change of the WebDriver executable.
-Explicit wait is implemented excusively in the local language bindings.
+Explicit wait is implemented exclusively in the local language bindings.
 Therefore, mixing is not recommended because things get more complicated when using Remote-WebDriver, because you could be using both the local and remote sides of the system multiple times-adapted from a quote from Jim Evans; one of the core contributors of Selenium
 
 - Replace duplicated code with reusable methods
@@ -112,13 +115,13 @@ The steps involved are:
 - Wrap the component with several decorators
 - Change the behaviour of its component by adding new functionality before and/or after the component method is called
 - The decorator class mirrors the type of component it decorates
-- and ofcourse provides an alternative to subclassing for extending behavior
+- and of course provides an alternative to subclassing for extending behavior
 
 ##### Participants
 - Component
 Defines the interface for objects that can have responsibilities added to them dynamically
 - Decorator
-Implements the same interface (abstratct class) as the component they will decorate. It has a HAS-A relationship 
+Implements the same interface (abstract class) as the component they will decorate. It has a HAS-A relationship 
 with the object it is extending, so the Component has an instance variable that holds a reference to the latter
 - ConcreteComponent
 The object that is going to be enhanced dynamically. It inherits the Component
@@ -126,8 +129,8 @@ The object that is going to be enhanced dynamically. It inherits the Component
 Decorators can enhance the state of the component. They can add new methods. The new behavior is typically
 added before and/or after an existing method in the component
 
-Note: Implementation of this pattern invovles the Composition. Composition over inheritance (oe composite reuse principle) in
-OOP is the principle where classes should achieve polymorphic behavios and code reuse by their composition (by containing
+Note: Implementation of this pattern involves the Composition. Composition over inheritance (oe composite reuse principle) in
+OOP is the principle where classes should achieve polymorphic behaviors and code reuse by their composition (by containing
 an instance of other classes that implement the desired functionality) rather than inheritance from the base or parent class. 
 This is especially important where languages like java do not allow multiple inheritance.
 
@@ -153,7 +156,7 @@ object creation belonging to a certain type, using a simple design pattern. This
 
 
 #### Test independence-isolation principle
-We have added a test with decorator pattern implementation
+We have added a test with decorator pattern implementation.
 and we will add the remaining 2, but the last 2 are all dependent on earlier tests.
 According to the test independence-isolation principle, each test should be independent and self-sufficient.
 
@@ -177,7 +180,7 @@ Another approach would be to generate the data (orders and users) using internal
 #### Finally
 A start to writing selenium automation tests is without using any complex design patterns and using a simple WebDriver syntax. Such tests tend to be unstable, with poor readability.
 An easy refactoring strategy is to use WebDriverWait class to stabilize the tests, demonstrated in the code.
-A more involved strategy to promote code reuse by implementing the Decorator design pattern demostrated in the code.
+A more involved strategy to promote code reuse by implementing the Decorator design pattern demonstrated in the code.
 Simple factory design pattern???
 Another strategy is Test Independence-Isolation principle suggested but not implemented.
 
@@ -207,7 +210,7 @@ Targets for this version:
 
 Running the instrumented code a number of times will produce a number of key measurements
 In most test suites the login tests are simply to validate login and serve as a starting point for tests that
-need to login for the rest of the workflow
+need to 'login' for the rest of the workflow
 One optimization is to use authentication cookies to speed up login.
 Usually this is implemented by calling an internal web API to generate a value of the authentication cookie.
 
@@ -223,6 +226,15 @@ Note:
 - The wait for ajax method must be used after the load event, because the call will throw UncaughtTypeError if jQuery is not defined.
   - _UncaughtTypeError: Cannot read property 'active' of undefined._
 
+```java
+
+public override void WaitForAjax()
+{
+var js = (IJavaScriptExecutor)_webDriver;
+_webDriverWait.Until(wd=>js.ExecuteScript("return jQuery.active").ToString() == "0");
+}
+
+```
 In WebDriver, the Until method in the Wait class is simply a loop that executes
 the contents of the code block passed to it until the code returns a true value.
 
@@ -231,18 +243,18 @@ In the case of the WaitForAjax method, the exit loop condition is reached when t
 If the conditional returns true, all the AJAX requests have finished, and we are ready to move to the next step.
 Use the new WaitForAjax method when there's a need to wait for async requests.
 
+#### Optimize Browser Initialization- Observer Design Pattern
 The test execution time can also be improved by optimizing the browser initialization.
 Also, after the click of the ‘Proceed to checkout’ button there's need for a more special wait logic that will replace the hard pause.
-There we need to wait for the entire page to load. Since there aren’t asynchronous requests, the WaitForAjax method 
+There we need to wait for the entire page to load. Since there aren’t asynchronous requests, the WaitForAjax method
 won’t work in this case. Therefore, we can add one more helper function to our WebDriver decorator: waitUntilPageLoadsCompletely(...)
 
-Optimize Browser Initialization- Observer Design Pattern
 The repeating and time-consuming browser initialization ca be optimized as it can take up to 2 seconds per test.
 Currently, the browser is set to start and close for each test. One optimization can be to reuse the browser so that
 it starts at the beginning of the whole test suite, and closes it after all tests have finished their execution.
 This will bring considerable execution time improvement
-However, if there's still need to restart the browser before some of the tests, we will need to expand the solution, where
-by adding the ability to configure this defaukt behavior per test class or test method.
+However, if there's still need to restart the browser before some of the tests, we will need to expand the solution, where-by
+adding the ability to configure this default behavior per test class or test method.
 Let's use the Observer design pattern for this improvement.
 Observer Design Pattern
 The Observer design pattern defines a one-to-many relation between objects, so that when one object changes its state, all 
@@ -284,7 +296,7 @@ of the subject. In order for the subject to be able to notify the observers, the
 the ITestBehaviorObserver interface where all notification methods are defined.
 
 The specific subject knows nothing about the implementations of the observers. It is working with a list of ITestBehaviorObserver objects.
-The Attach and Detach methods add and remove observers to/from the collection. In this classic implementation of the observer
+The "Attach and Detach" methods add and remove observers to/from the collection. In this classic implementation of the observer 
 design pattern, the observers are responsible to associate themselves with the subject class. Not all the observers need
 to implement all the notification methods. In order to support this requirement, we are going to add a base class that is
 going to implement the ITestBehaviorObserver interface.

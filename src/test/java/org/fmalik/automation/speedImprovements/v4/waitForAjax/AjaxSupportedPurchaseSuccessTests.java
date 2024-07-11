@@ -34,23 +34,8 @@ public class AjaxSupportedPurchaseSuccessTests {
         var viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
         viewCartButton.click();
 
-        var couponCodeTextField = driver.findElement(By.id("coupon_code"));
-        couponCodeTextField.typeText("happybirthday");
-        var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
-        applyCouponButton.click();
-        driver.waitForAjax();
-        var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
-        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
-
-        var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
-        quantityBox.typeText("2");
-        driver.waitForAjax();
-
-        var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
-        updateCart.click();
-        driver.waitForAjax();
-        var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
-        Assert.assertEquals("114.00€", totalSpan.getText());
+        applyCoupon();
+        increaseProductQuantity();
 
         var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
@@ -102,22 +87,8 @@ public class AjaxSupportedPurchaseSuccessTests {
         var viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
         viewCartButton.click();
 
-        var couponCodeTextField = driver.findElement(By.id("coupon_code"));
-        couponCodeTextField.typeText("happybirthday");
-        var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
-        applyCouponButton.click();
-        var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
-        driver.waitForAjax();
-        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
-
-        var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
-        quantityBox.typeText("2");
-        driver.waitForAjax();
-        var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
-        updateCart.click();
-        driver.waitForAjax();
-        var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
-        Assert.assertEquals(totalSpan.getText(), "114.00€");
+        applyCoupon();
+        increaseProductQuantity();
 
         var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
@@ -167,6 +138,27 @@ public class AjaxSupportedPurchaseSuccessTests {
         var orderName = driver.findElement(By.xpath("//h1"));
         String expectedMessage = String.format("Order #%s", purchaseOrderNumber);
         Assert.assertEquals(expectedMessage, orderName.getText());
+    }
+
+    private void increaseProductQuantity() {
+        var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
+        quantityBox.typeText("2");
+        driver.waitForAjax();
+        var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
+        updateCart.click();
+        driver.waitForAjax();
+        var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
+        Assert.assertEquals("114.00€", totalSpan.getText());
+    }
+
+    private void applyCoupon() {
+        var couponCodeTextField = driver.findElement(By.id("coupon_code"));
+        couponCodeTextField.typeText("happybirthday");
+        var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
+        applyCouponButton.click();
+        driver.waitForAjax();
+        var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
+        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
     }
 
     private String GetUserPasswordFromDb(String userName) {
