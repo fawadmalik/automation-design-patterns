@@ -46,8 +46,10 @@ public class InstrumentedPurchaseSuccessTests {
 
         applyCoupon();
         increaseProductQuantity();
-
-        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        Thread.sleep(3000);
+//        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        Thread.sleep(3000);
         proceedToCheckout.click();
 
         var billingFirstName = driver.findElement(By.id("billing_first_name"));
@@ -99,25 +101,28 @@ public class InstrumentedPurchaseSuccessTests {
         var viewCartButton = driver.findElement(By.cssSelector("[class*='added_to_cart wc-forward']"));
         viewCartButton.click();
 
-        var couponCodeTextField = driver.findElement(By.id("coupon_code"));
-        couponCodeTextField.typeText("happybirthday");
-        var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
-        applyCouponButton.click();
-        Thread.sleep(4000);
-        var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
-        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
+//        var couponCodeTextField = driver.findElement(By.id("coupon_code"));
+//        couponCodeTextField.typeText("happybirthday");
+//        var applyCouponButton = driver.findElement(By.cssSelector("[value*='Apply coupon']"));
+//        applyCouponButton.click();
+//        Thread.sleep(4000);
+//        var messageAlert = driver.findElement(By.cssSelector("[class*='woocommerce-message']"));
+//        Assert.assertEquals(messageAlert.getText(), "Coupon code applied successfully.");
+//
+//        var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
+//        quantityBox.typeText("2");
+//        var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
+//        updateCart.click();
+//        Thread.sleep(4000);
+//        var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
+//        Assert.assertEquals("114.00€", totalSpan.getText());
 
-        var quantityBox = driver.findElement(By.cssSelector("[class*='input-text qty text']"));
-        quantityBox.typeText("2");
-        var updateCart = driver.findElement(By.cssSelector("[value*='Update cart']"));
-        updateCart.click();
-        Thread.sleep(4000);
-        var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
-        Assert.assertEquals("114.00€", totalSpan.getText());
-//        applyCoupon();
-//        increaseProductQuantity();
+        applyCoupon();
+        increaseProductQuantity();
 
-        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+//        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+
         proceedToCheckout.click();
 
         var loginHereLink = driver.findElement(By.linkText("Click here to login"));
@@ -151,7 +156,7 @@ public class InstrumentedPurchaseSuccessTests {
 
         var myAccountLink = driver.findElement(By.linkText("My account"));
         myAccountLink.click();
-        var userName = driver.findElement(By.id("username"));
+        var userName = driver.findElementAndMoveToIt(By.id("username"));
         Thread.sleep(4000);
         userName.typeText(purchaseEmail);
         var password = driver.findElement(By.id("password"));
