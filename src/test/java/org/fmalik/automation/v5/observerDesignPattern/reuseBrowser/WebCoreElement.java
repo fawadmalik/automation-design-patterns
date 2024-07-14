@@ -19,6 +19,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 public class WebCoreElement extends Element {
     private final WebDriver webDriver;
     private final WebElement webElement;
@@ -69,7 +71,7 @@ public class WebCoreElement extends Element {
     }
 
     private void waitToBeClickable(By by) {
-        var webDriverWait = new WebDriverWait(webDriver, 30);
+        var webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         webDriverWait.until(ExpectedConditions.elementToBeClickable(by));
     }
 }
