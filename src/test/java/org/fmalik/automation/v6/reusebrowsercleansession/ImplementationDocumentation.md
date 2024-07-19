@@ -67,3 +67,32 @@ public override void PostTestCleanup(TestContext context, MemberInfo memberInfo)
 ```
 The last part of the puzzle is to combine all these classes. This happens in the
 BaseTest class.
+```java
+public class BaseTest{}
+```
+If the test classes need to add its TestInitialize or TestCleanup logic, they will now
+have to override the TestInit and TestCleanup methods in the BaseTest class, instead of using the
+TestInitialize and TestCleanup attributes.
+There are three important methods that are invoked in the base CoreTestInit
+method. First, we invoke the PreTestInit method of the current subject class
+which has the responsibility to invoke PreTestInit for each observer. After that,
+the TestInit method executes or its overridden version. Finally, all observers'
+PostTestInit methods are invoked through the current subject again. The same
+flow is valid for the cleanup methods.
+_driver = new LoggingDriver(new WebDriver());
+new BrowserLaunchTestBehaviorObserver(CurrentTestExecutionSubject, _driver);
+In the constructor are created the instances of all desired observers through
+passing them the current subject as a parameter. There we moved the creation
+of our WebDriver decorator which we pass as an argument to the
+BrowserLaunchTestBehaviorObserver.
+After the base constructor is executed, the TestContext property is populated
+from the MSTest execution engine. It is used to retrieve the currently
+executed test’s MemberInfo.
+
+public static void AssemblyCleanup()
+{
+_driver?.Quit();
+}
+Since all our tests may reuse the current browser, we need to make sure that
+at the end of the test run we will close the browser. We do that in the
+AssemblyCleanup method, which is executed after all tests.
