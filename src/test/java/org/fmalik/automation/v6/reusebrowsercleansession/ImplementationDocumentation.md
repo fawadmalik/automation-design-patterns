@@ -96,3 +96,28 @@ _driver?.Quit();
 Since all our tests may reuse the current browser, we need to make sure that
 at the end of the test run we will close the browser. We do that in the
 AssemblyCleanup method, which is executed after all tests.
+
+#### Isolated Browser Initialization for Each Test
+
+There still is a problem with our new solution. Depending on which test runs first, weird behavior may occur.
+For example, if the tests that have logged in the website are executed first,
+then the test with anonymous user purchases will fail since we reuse the
+browser and the login session. Also, because of this dependency, we broke
+the Hermetic test pattern.
+One way to handle this situation is to extend our solution to clear the cache
+and cookies of the browser in case we reuse it - that way we would have a
+clean session for each test.
+First, we need to add a new method for deleting all cookies to our WebDriver
+decorator.
+public override void DeleteAllCookies()
+{
+_webDriver.Manage().Cookies.DeleteAllCookies();
+}
+After that we need to change the PreTestInit and PostTestCleanup method of the
+BrowserLaunchTestBehaviorObserver class.
+
+```java
+public override void PreTestInit(TestContext context, MemberInfo memberInfo) {}
+```
+In case we are reusing the browser, we delete all cookies, ensuring that we
+won't mess up with the state of the next test.
