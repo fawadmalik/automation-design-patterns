@@ -36,3 +36,28 @@ by not waiting for 3rd-party services loading. Furthermore, the tests will be
 more hermetically sealed by blocking the third-party requests, reducing the
 external dependencies that often cause test failures.
 
+## The code can be further integrated
+It can be integrated into the browser initialization through attributes.
+
+### Summary
+In the last 3 packages, we investigated how we can speed up our test suite in many
+ways.
+First, it was by instrumenting the code so that we can list all
+potential optimization points.
+Next, There was improvement in the login processes by using API calls.
+Next, we handled async requests and thus eliminating all hard-coded pauses.
+Next, we created a comprehensive solution for browser initialization using the Observer design
+pattern that allowed us to reuse the existing browser, saving a couple of
+seconds for each test.
+Lastly, saw some benefits of the Black Hole Proxy approach by blocking irrelevant for the test 3rd-party services.
+
+Let's answer some questions to gain more understanding on these approaches.
+## Questions
+1. How would you decide which part of your code should be optimized?
+2. What is the typical approach for speeding up the login process?
+3. How can you use WebDriver API to handle asynchronous forms?
+4. Can you list the main participants in the Observer design pattern?
+5. Can you create the Observer design pattern UML diagram?
+6. Which WebDriver method can be used to make sure that each test is not depending on the previous
+   one if we reuse the browser?
+7. What are the advantages of using the Black Hole Proxy approach?
