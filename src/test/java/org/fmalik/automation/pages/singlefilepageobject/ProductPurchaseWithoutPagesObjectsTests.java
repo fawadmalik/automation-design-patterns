@@ -101,7 +101,7 @@ public class ProductPurchaseWithoutPagesObjectsTests {
         placeOrderButton.click();
 
         driver.waitForAjax();
-        var receivedMessage = driver.findElement(By.xpath("/html/body/div[1]/div/div/div/main/div/header/h1"));
+        var receivedMessage = driver.findElement(By.xpath("//h1[@class='entry-title']"));
         Assert.assertEquals(receivedMessage.getText(), "Order received");
     }
 
