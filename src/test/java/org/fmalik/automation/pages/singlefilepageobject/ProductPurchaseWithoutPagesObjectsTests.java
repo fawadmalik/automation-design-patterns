@@ -18,6 +18,7 @@ import org.fmalik.automation.core.Driver;
 import org.fmalik.automation.core.LoggingDriver;
 import org.fmalik.automation.core.WebCoreDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -133,6 +134,7 @@ public class ProductPurchaseWithoutPagesObjectsTests {
 
         var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
+        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
         driver.waitUntilPageLoadsCompletely();
 
         var loginHereLink = driver.findElement(By.linkText("Click here to login"));
