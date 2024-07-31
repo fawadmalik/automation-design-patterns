@@ -58,4 +58,8 @@ public class DriverDecorator extends Driver {
     public void waitUntilPageLoadsCompletely() {
         driver.waitUntilPageLoadsCompletely();
     }
+
+    public Element findElementAndMoveToIt(By locator) {
+        return driver.findElementAndMoveToIt(locator);
+    }
 }

@@ -65,9 +65,10 @@ public class ProductPurchaseWithoutPageObjectsTests {
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals("114.00€", totalSpan.getText());
 
-        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         proceedToCheckout.click();
         driver.waitUntilPageLoadsCompletely();
+        driver.waitForAjax();
 
         var billingFirstName = driver.findElement(By.id("billing_first_name"));
         billingFirstName.typeText("Anton");
@@ -131,13 +132,13 @@ public class ProductPurchaseWithoutPageObjectsTests {
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals(totalSpan.getText(), "114.00€");
 
-        var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
-        driver.scrollToTheBottom();
-        wait(3000);
+        var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        driver.waitForAjax();
         proceedToCheckout.click();
         driver.waitUntilPageLoadsCompletely();
+        driver.waitForAjax();
 
-        var loginHereLink = driver.findElement(By.linkText("Click here to login"));
+        var loginHereLink = driver.findElementAndMoveToIt(By.linkText("Click here to login"));
         loginHereLink.click();
         var userName = driver.findElement(By.id("username"));
         driver.waitForAjax();

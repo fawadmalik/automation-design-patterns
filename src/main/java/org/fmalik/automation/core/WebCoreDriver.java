@@ -115,4 +115,13 @@ public class WebCoreDriver extends Driver {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) webDriver;
         webDriverWait.until(d -> javascriptExecutor.executeScript("return document.readyState").toString().equals("complete"));
     }
+
+    @Override
+    public Element findElementAndMoveToIt(By locator) {
+        WebElement nativeWebElement = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        Element element = new WebCoreElement(webDriver, nativeWebElement, locator);
+        Element logElement = new LogElement(element);
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", nativeWebElement);
+        return logElement;
+    }
 }
