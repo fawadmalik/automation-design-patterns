@@ -10,7 +10,7 @@ With the latest releases of the WebDriver .NET bindings, the way we create
 page objects have changed compared to the Java ones. Let's review shortly what was the way of defining page objects before 3.11.0 release.
 
 ```java
-public class SearchEngineMainPage
+public class SearchEngineMainPage {}
 ```
 Firstly to locate the different web elements FindsBy attribute was used where
 you can specify the finding strategy How - find by Id, Class, XPath, etc. and
@@ -25,11 +25,10 @@ of the API.
 “The .NET implementation of these constructs was created mostly because
 some users asked, "Java has it, so why doesn't .NET?" Rather than blindly
 copying the Java implementations as was done, it would have been better to
-think about what actually makes sense when using C#. In other words, "C#
-isn't Java, and therefore the things that work best for Java may not be
-entirely appropriate for C#."
+think about what actually makes sense when using C#. In other words:
+>C# isn't Java, and therefore the things that work best for Java may not be entirely appropriate for C#.
 
-In the case of the .NET PageFactory, the implementation was problematic
+"In the case of the .NET PageFactory, the implementation was problematic
 and cumbersome, as well as not nearly flexible enough for the myriad ways
 people wanted to create Page Objects. Additionally, when .NET Core 2.0 was
 released, the classes upon which the .NET PageFactory relied were not
@@ -42,5 +41,5 @@ The second approach made the code nearly impossible to properly maintain.
 Furthermore, with respect to the PageFactory in particular, there is no
 benefit to be gained by identifying elements via an attribute over doing it
 directly in runtime code. Claims that the PageFactory made Page Object
-creation and maintenance less verbose simply do not hold up under close scrutiny.”
+creation and maintenance less verbose simply do not hold up under scrutiny.”
 
