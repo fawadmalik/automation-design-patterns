@@ -131,7 +131,7 @@ public class ProductPurchaseWithoutPageObjectsTests {
         driver.waitForAjax();
         var totalSpan = driver.findElement(By.xpath("//*[@class='order-total']//span"));
         Assert.assertEquals(totalSpan.getText(), "114.00€");
-
+        driver.waitForAjax();
         var proceedToCheckout = driver.findElementAndMoveToIt(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
         driver.waitForAjax();
         proceedToCheckout.click();
