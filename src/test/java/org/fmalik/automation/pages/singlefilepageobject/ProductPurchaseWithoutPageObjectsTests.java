@@ -18,13 +18,12 @@ import org.fmalik.automation.core.Driver;
 import org.fmalik.automation.core.LoggingDriver;
 import org.fmalik.automation.core.WebCoreDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class ProductPurchaseWithoutPagesObjectsTests {
+public class ProductPurchaseWithoutPageObjectsTests {
     private Driver driver;
     private static String purchaseEmail;
     private static String purchaseOrderNumber;
@@ -133,8 +132,9 @@ public class ProductPurchaseWithoutPagesObjectsTests {
         Assert.assertEquals(totalSpan.getText(), "114.00€");
 
         var proceedToCheckout = driver.findElement(By.cssSelector("[class*='checkout-button button alt wc-forward']"));
+        driver.scrollToTheBottom();
+        wait(3000);
         proceedToCheckout.click();
-        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0, document.body.scrollHeight);");
         driver.waitUntilPageLoadsCompletely();
 
         var loginHereLink = driver.findElement(By.linkText("Click here to login"));
