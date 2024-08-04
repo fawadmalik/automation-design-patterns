@@ -64,7 +64,7 @@ public class WebCoreDriver extends Driver {
             default:
                 throw new IllegalArgumentException(browser.name());
         }
-
+        webDriver.manage().window().maximize();
         webDriverWait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
     }
 
