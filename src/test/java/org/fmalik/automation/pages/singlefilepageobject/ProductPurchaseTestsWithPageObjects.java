@@ -56,8 +56,9 @@ public class ProductPurchaseTestsWithPageObjects {
 
         Assert.assertEquals("114.00€", cartPage.getTotal());
 
+        driver.waitForAjax();
         cartPage.clickProceedToCheckout();
-
+        driver.waitForAjax();
         var receivedMessage = driver.findElement(By.xpath("//h1"));
         Assert.assertEquals(receivedMessage.getText(), "Checkout");
     }
@@ -97,6 +98,7 @@ public class ProductPurchaseTestsWithPageObjects {
         loginHereLink.click();
         var userName = driver.findElement(By.id("username"));
         driver.waitForAjax();
+        purchaseEmail = "info@berlinspaceflowers.com";
         userName.typeText(purchaseEmail);
         var password = driver.findElement(By.id("password"));
         password.typeText(GetUserPasswordFromDb(purchaseEmail));
