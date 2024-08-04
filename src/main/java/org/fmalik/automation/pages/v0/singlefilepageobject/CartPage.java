@@ -37,6 +37,7 @@ public class CartPage {
     }
 
     public void clickProceedToCheckout() {
+        driver.waitForAjax();
         proceedToCheckout().click();
         driver.waitUntilPageLoadsCompletely();
     }

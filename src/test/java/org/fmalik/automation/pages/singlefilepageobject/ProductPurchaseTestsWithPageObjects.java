@@ -92,6 +92,7 @@ public class ProductPurchaseTestsWithPageObjects {
         proceedToCheckout.click();
         driver.waitUntilPageLoadsCompletely();
 
+        driver.waitForAjax();
         var loginHereLink = driver.findElement(By.linkText("Click here to login"));
         loginHereLink.click();
         var userName = driver.findElement(By.id("username"));
