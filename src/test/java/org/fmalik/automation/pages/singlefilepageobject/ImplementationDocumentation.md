@@ -78,8 +78,56 @@ Again, all elements are represented here as private properties so that they
 cannot be accessed outside the page object. The page object exposes only a
 few public methods representing the so-called DSL making the tests more
 readable.
+
 ### Note
+
 Domain Specific languages (DSLs) are languages developed to solve problems in a specific domain, which distinguishes
 them from general purpose languages (GPLs). One characteristic of DSLs is that they support a restricted set of
 concepts, limited to the domain.
 
+### Page Object Model Usage in Tests
+Let's make the tests more readable and concise with the use of page object pattern?
+
+During the class initialize phase, we create the page objects, and we can use
+them directly in our tests. As you can see their usage has improved the
+readability of our tests significantly. All the low-level WebDriver details and
+finding of web elements are hidden from us. Moreover, the maintainability is
+also improved significantly, since if some of the locators change over time,
+we can go directly in the page object and change it in a single place.
+We can apply the same technique for the rest of the tests, so I encourage you
+to download the source code and try to refactor the tests by creating the rest
+of the page objects.
+
+### Handling Common Page Elements And Actions
+
+As you will see maintainability and readability are closely related. With the
+upcoming changes to our tests, we will make them easier to maintain and
+read at the same time. Why not start by understanding which are the common page elements?
+
+### Defining Common Page Elements
+
+In the first implemented version of the Page Object Model design pattern,
+we decided to group the elements and actions based on the physical web
+pages, e.g. home page, cart page, billing page and so on. However, there are
+many parts of the pages, where certain elements are repeated with the same
+HTML markup and functionality they provide. Let us take a closer look at
+our shop's home page.
+
+The first such group is the logo and the search bar. The next one is the main
+navigation. After that, the cart icon and current cart price label. We also have
+the unique functionality of the page related to the e-shop - displaying all
+items that the user can purchase. Lastly, there is one more common section -
+the footer.
+Why not examine our next page - the cart?
+
+Common sections with the home page are the top section - logo and search
+input, the navigation, the cart info, and the footer. The unique part here is
+positioned below the cart title, that is one new section that is common only to
+this and next cart pages - the breadcrumb.
+After we analyzed the sections of our page, we found that some of them are
+shared between many pages. We can allow the users to use search on the
+pages or click on the menu with the current design of our page objects, this
+means that we will have a duplicated logic between our pages, which is in
+almost all cases a bad practice since with each copied code the
+maintainability costs rise. Moreover, the pages will do more than one thing
+which means that we won't follow the Single Responsibility Principle.
