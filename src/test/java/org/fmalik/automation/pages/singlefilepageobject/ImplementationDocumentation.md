@@ -131,3 +131,12 @@ means that we will have a duplicated logic between our pages, which is in
 almost all cases a bad practice since with each copied code the
 maintainability costs rise. Moreover, the pages will do more than one thing
 which means that we won't follow the Single Responsibility Principle.
+
+### Note
+DRY - Do Not Repeat Yourself Principle
+A well-implemented and Page Object library has one and only oneway to accomplish any action. This prevents duplicate
+implementation of the same SearchItem or FillBillingInfo methods.
+
+### Non-Dry Page Objects
+To ease the comparison, we will review what the first two page objects will look like if we just transfer all elements
+and logic available on the pages.
