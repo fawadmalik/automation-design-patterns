@@ -121,7 +121,7 @@ public class WebCoreDriver extends Driver {
         WebElement nativeWebElement = webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
         Element element = new WebCoreElement(webDriver, nativeWebElement, locator);
         Element logElement = new LogElement(element);
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", nativeWebElement);
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView({block: \"center\"})", nativeWebElement);
         return logElement;
     }
 }
