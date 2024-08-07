@@ -140,3 +140,68 @@ implementation of the same SearchItem or FillBillingInfo methods.
 ### Non-Dry Page Objects
 To ease the comparison, we will review what the first two page objects will look like if we just transfer all elements
 and logic available on the pages.
+We will have the following classes.
+```java
+public class MainPage{}
+public class CartPage{}
+public abstract class BaseEShopPage{}
+public class CartPage extends BaseEShopPage{}
+
+```
+### First Version of Reusing Common Elements
+A simple first try to solve the problem is to create a base class that will hold
+all common elements and related actions. Let’s try to follow the KISS
+principle, starting with something simple.
+
+The implementation code should show how much shorter the page becomes. The shorter it is, the easier it is to read and understand.
+The cart page is twice as short compared to before. However, our simplest
+solution has a drawback. We moved the breadcrumb logic to the base class.
+Although even though the breadcrumb is displayed only on the cart pages,
+now you can access it from the MainPage as well. This could mislead someone
+to use it on a page where the breadcrumb does not exist.
+In the next part of the chapter, we will examine a much better approach to
+solve such problems.
+
+### Creating Common Page Section Page Objects
+If you review the images of the pages and the code examples, you will distinguish four logical groups of elements:
+1. Search
+2. Main menu
+3. Cart info
+4. Breadcrumb
+
+Having such groups, we can create four separate page objects that will keep
+each group’s elements and operations. Since they are not entire pages, I will
+name them with the suffix - Section instead of Page
+
+```java
+public class SearchSection{}
+```
+The SearchSection includes only a single method called SearchForItem, allowing us to search for items on the page.
+The next group MainMenuSection consists of methods that open the various pages of the website.
+```java
+public class MainMenuSection{}
+```
+The CartInfoSection exposes two methods. They are:
+- One for opening the cart through the cart icon
+- One for getting the current cart amount
+```java
+public class CartInfoSection{}
+```
+Lastly, we have the BreadcrumbSection, which is responsible for opening breadcrumb items.
+```java
+public class BreadcrumbSection{}
+```
+After creating all common section page objects, let’s integrate them into the existing page objects.
+Page Sections Usage in Page Objects - Version One
+The simplest way to use the sections is to add them as public properties where needed- eliminating, for now, the base classes.
+
+### Note
+KISS refers to the famous acronym "Keep it Simple Stupid". It can also mean "Keep it Short and Simple". It is tightly connected
+to the DRY principle. In the beginning its a good idea to not make a complex solution upfront, thinking abount the
+future that may never come. This often leads to highly complex, hard to maintain and understand code. So better to
+start with a somewhat brute force souktion that works well and then enhance it.
+
+More or less, the first version is much closer to the desired outcome. However, there still is some duplicated code between the pages.
+The first three sections should be present on all pages, which means that with each addition of a new page, I will have to copy these
+three properties and their initialization. In order to fix this, we will bring back the base class that we created earlier.
+
