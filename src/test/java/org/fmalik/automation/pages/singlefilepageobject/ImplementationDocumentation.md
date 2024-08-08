@@ -204,4 +204,3 @@ start with a somewhat brute force souktion that works well and then enhance it.
 More or less, the first version is much closer to the desired outcome. However, there still is some duplicated code between the pages.
 The first three sections should be present on all pages, which means that with each addition of a new page, I will have to copy these
 three properties and their initialization. In order to fix this, we will bring back the base class that we created earlier.
-
